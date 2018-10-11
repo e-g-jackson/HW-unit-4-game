@@ -16,7 +16,7 @@ header {
     float: left;
     margin: 10px;
 }
-.defDiv .attDiv {
+#defDiv #attDiv {
     content: "";
     display: table;
     clear: both;
