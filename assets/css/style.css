@@ -16,18 +16,47 @@ header {
     float: left;
     margin: 10px;
 }
+.combatant{
+    width:300px;
+    height: auto;
+}
+.combatant:hover{
+
+}
+#combatDiv{
+    width:50%;
+    display: table;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#defDiv{
+    float: left;
+}
+#attDiv{
+    float: right;
+}
 #defDiv #attDiv {
     content: "";
     display: table;
     clear: both;
-    border:5px blue dotted;
+    border: 20px blue dotted;
     height: 20%;
+    margin-left: auto;
+    margin-right: auto;
+}
+#attButton{
+    margin-top: auto;
+    margin-bottom: auto;
 }
 #gameDiv {
-    border: 5px yellow solid;
+    border-top: 5px yellow solid;
     display: table;
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;
     height: 50%;
+    padding-left:auto;
+    padding-right: auto;
+    filter: grayscale(1);
 }
