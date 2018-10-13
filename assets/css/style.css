@@ -1,4 +1,10 @@
+@font-face{
+    font-family: SelznickNormal;
+    src: url('../fonts/SelznickNormal.otf'), 
+    url('../fonts/SelznickNormal.ttf');
+}
 body {
+    font-family: SelznickNormal;
     background-image: url("../images/batman_background.jpg");
     background-size: cover;
     background-color: #777777;
@@ -10,18 +16,35 @@ header {
     top: 0px;
 }
 .charImg {
-    border:5px red solid;
     height: 200px;
     width: auto;
     float: left;
     margin: 10px;
+    filter: grayscale(1);
+}
+.charImg:hover{
+    filter: none;
 }
 .combatant{
     width:300px;
     height: auto;
+    border: aqua 5px solid;
 }
 .combatant:hover{
-
+    border: red 5px solid;
+}
+.combatText{
+    font-size: 70px;
+}
+.charInformation{
+    font-family: helvetica;
+    text-transform: uppercase;
+    background-color: #001e31;
+    color: white;
+}
+#title{
+    margin-left: 20%;
+    font-size: 100px;
 }
 #combatDiv{
     width:50%;
@@ -29,6 +52,7 @@ header {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
+    margin-bottom: 20px;
 }
 #defDiv{
     float: left;
@@ -40,23 +64,22 @@ header {
     content: "";
     display: table;
     clear: both;
-    border: 20px blue dotted;
     height: 20%;
     margin-left: auto;
     margin-right: auto;
 }
 #attButton{
-    margin-top: auto;
-    margin-bottom: auto;
+    justify-self: center;
+    height: 100px;
+    margin-top: 25%
 }
 #gameDiv {
-    border-top: 5px yellow solid;
-    display: table;
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
+    display: flex;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
     height: 50%;
     padding-left:auto;
     padding-right: auto;
-    filter: grayscale(1);
+    justify-content: center;
 }

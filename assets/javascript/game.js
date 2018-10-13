@@ -1,27 +1,27 @@
 //character variables defined
-var batman = {name: "batman", life: 120, attack: 5, img: "assets/images/batman.jpg"};
-var nightwing = {name: "nightwing", life: 100, attack: 10, img: "assets/images/nightwing.jpg"};
-var catwoman = {name: "catwoman", life: 130, attack: 20, img: "assets/images/catwoman.jpg"};
-var joker = {name: "joker", life: 150, attack: 25, img: "assets/images/joker.jpeg"};
+var batman = {name: "batman", life: 150, attack: 5, img: "assets/images/batman.jpg"};
+var nightwing = {name: "nightwing", life: 100, attack: 5, img: "assets/images/nightwing.jpg"};
+var catwoman = {name: "catwoman", life: 130, attack: 10, img: "assets/images/catwoman.jpg"};
+var joker = {name: "joker", life: 170, attack: 25, img: "assets/images/joker.jpeg"};
 //char Array
 var char = [batman, nightwing, catwoman, joker];
 var gDiv = document.getElementById("gameDiv");
 var def = 0;
 var att = 0;
 var btn = 0;
+var numChar = char.length;
 console.log("variables defined");
 
 var combatDiv = $('<div></div>');
     $(combatDiv).attr('id' , 'combatDiv');
-    $(combatDiv).html('Welcome to the arena!<br><br>')
     $(gDiv).before(combatDiv);
 var defDiv = $('<div></div>');
     $(defDiv).attr('id', 'defDiv');
-    $(defDiv).html('<h2>Defender</h2>');
+    $(defDiv).html('<h2 class=\'combatText\'>Defender</h2>');
     $(defDiv).appendTo(combatDiv);
 var attDiv = $('<div></div>');
     $(attDiv).attr('id', 'attDiv');
-    $(attDiv).html('<h2>Attacker</h2>')
+    $(attDiv).html('<h2 class=\'combatText\'>Attacker</h2>')
     $(attDiv).appendTo(combatDiv);
 
 for ( let i = 0; i < char.length; i++){
@@ -48,11 +48,15 @@ var buttonSpawn = function(){
         var attButton = $('<button></button>');
             $(attButton).attr("id", "attButton");
             $(attButton).attr("class", "button btn-lg btn-danger");
+            $(attButton).attr("style", "font-size:60px;")
             $(attButton).html("Attack!");
             $(defDiv).after(attButton);
             btn = 1;
         }
 };
+
+var winCondition = function(){
+    };
 
 //attack button functionality
 $('body').on('click', '#attButton', function(){
@@ -70,20 +74,32 @@ $('body').on('click', '#attButton', function(){
         return difference;
     };
     var defBoost = function(){
-        var Boost = defender.attack * 1.25;
+        var Boost = defender.attack + 5;
         return Boost;
     };
     $(attacker).prop('life', attDif());
     $(defender).prop('life', defDif());
     $(defender).prop('attack', defBoost());
+    var defCharInfo = $('#defCharInfo')
+        defCharInfo.empty();
+        $(defCharInfo).html("Name: " + defender.name + "<br>Life:" + defender.life +"<br>Attack:" + defender.attack);
+    var attCharInfo = $('#attCharInfo')
+        attCharInfo.empty();
+        $(attCharInfo).html("Name: " + attacker.name + "<br>Life:" + attacker.life +"<br>Attack:" + attacker.attack);
     console.log(defender.life);
     console.log(attacker.life);
     if ( defender.life <= 0 ){
         alert('You lose!')
     }
+    else if( numChar == 1 && attacker.life <= 0 ){
+        alert('You Win the Game!')
+    }
     else if ( attacker.life <= 0 ){
         alert('You Win! Pick another opponent!')
         $('#attDiv').empty();
+        $(attDiv).html('<h2 class = \"combatText\">Attacker</h2>')
+        numChar--;
+        console.log(numChar)
         att = 0;
     }
 });
@@ -97,6 +113,12 @@ $('.charImg').on("click", function(){
             $(this).removeClass('charImg');
             $(this).attr('class', 'combatant defender rounded-circle');
             $(this).detach().appendTo('#defDiv');
+            var ID = eval(picId);
+            var defCharInfo = $('<div></div>')
+                $(defCharInfo).attr('id', 'defCharInfo')
+                $(defCharInfo).attr('class', 'charInformation alert');
+                $(defCharInfo).html("Name: " + ID.name + "<br>Life:" + ID.life +"<br>Attack:" + ID.attack);
+                $(defCharInfo).appendTo('#defDiv');
             console.log('There is now a defender!');
         }
         else if( def === 1 && att === 0){
@@ -104,6 +126,12 @@ $('.charImg').on("click", function(){
             $(this).removeClass('charImg');
             $(this).attr('class', 'combatant attacker rounded-circle');
             $(this).detach().appendTo('#attDiv');
+            var ID = eval(picId);
+            var attCharInfo = $('<div></div>')
+                $(attCharInfo).attr('id', 'attCharInfo')
+                $(attCharInfo).attr('class', 'charInformation alert');
+                $(attCharInfo).html("Name: " + ID.name + "<br>Life:" + ID.life +"<br>Attack:" + ID.attack);
+                $(attCharInfo).appendTo('#attDiv');
             console.log('There is now an attacker!');
             window.setTimeout(buttonSpawn(), 250)
         }
