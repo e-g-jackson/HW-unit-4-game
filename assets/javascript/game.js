@@ -94,7 +94,7 @@ $('body').on('click', '#attButton', function(){
         if(numChar == 1){
             alert('You Win the Game!');
             $(attDiv).empty();
-            $(attDiv).html('<h2 class = \'combatText\'style = \'color: yellow; align: center; vertical-align: center\'>You Won!</>')
+            $(attDiv).html('<h2 class = \'combatText\'style = \'color: yellow; margin: auto; margin-top: 120%\'>You Won!</>')
         }
         else if (numChar > 1){
             alert('You Win! Pick another opponent!')
