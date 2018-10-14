@@ -9,7 +9,7 @@ var gDiv = document.getElementById("gameDiv");
 var def = 0;
 var att = 0;
 var btn = 0;
-var numChar = char.length;
+var numChar = char.length - 1;
 console.log("variables defined");
 
 var combatDiv = $('<div></div>');
@@ -88,19 +88,25 @@ $('body').on('click', '#attButton', function(){
         $(attCharInfo).html("Name: " + attacker.name + "<br>Life:" + attacker.life +"<br>Attack:" + attacker.attack);
     console.log(defender.life);
     console.log(attacker.life);
-    if ( defender.life <= 0 ){
+   
+    if ( attacker.life <= 0){
+        
+        if(numChar == 1){
+            alert('You Win the Game!');
+            $(attDiv).empty();
+            $(attDiv).html('<h2 class = \'combatText\'style = \'color: yellow; align: center; vertical-align: center\'>You Won!</>')
+        }
+        else if (numChar > 1){
+            alert('You Win! Pick another opponent!')
+            $(attDiv).empty();
+            $(attDiv).html('<h2 class = \"combatText\">Attacker</h2>');
+            numChar--;
+            console.log(numChar)
+            att = 0;
+        }
+    }
+    else if ( defender.life <= 0 ){
         alert('You lose!')
-    }
-    else if( numChar == 1 && attacker.life <= 0 ){
-        alert('You Win the Game!')
-    }
-    else if ( attacker.life <= 0 ){
-        alert('You Win! Pick another opponent!')
-        $('#attDiv').empty();
-        $(attDiv).html('<h2 class = \"combatText\">Attacker</h2>')
-        numChar--;
-        console.log(numChar)
-        att = 0;
     }
 });
 
